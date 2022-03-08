@@ -14,7 +14,7 @@ USE Store ;
 -- -----------------------------------------------------
 -- Table `Store`.`Product`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS Store.Product (
+CREATE TABLE IF NOT EXISTS Store.Product(
   id_Product INT NOT NULL AUTO_INCREMENT,
   name_product VARCHAR(45) NOT NULL,
   category_product VARCHAR(45) NOT NULL,
@@ -27,7 +27,7 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table Store.Provider
+-- Table `Store`.`Provider`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS Store.Provider (
   idProvider INT NOT NULL AUTO_INCREMENT,
@@ -46,7 +46,7 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table Store.Sale
+-- Table `Store`.`Sale`
 -- -----------------------------------------------------
 
 
@@ -62,29 +62,6 @@ CREATE TABLE IF NOT EXISTS Store.Sale (
   CONSTRAINT fk_Sale_Customer1
     FOREIGN KEY (Customer_id_Customer1)
     REFERENCES Store.Customer (id_Customer)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
-
--- -----------------------------------------------------
--- Table `Store`.`Saller`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS Store.Saller (
-  id_Saller INT NOT NULL,
-  name_sell VARCHAR(45) NOT NULL,
-  type_document_sell VARCHAR(45) NOT NULL,
-  number_document_sell VARCHAR(45) NOT NULL,
-  creat_at_sell DATE NOT NULL,
-  update_sell DATE NOT NULL,
-  delete_sell DATE NOT NULL,
-  Sale_id_Sale INT NOT NULL,
-  PRIMARY KEY (id_Saller, Sale_id_Sale),
-  INDEX fk_Saller_Sale1_idx (Sale_id_Sale ASC) VISIBLE,
-  CONSTRAINT fk_Saller_Sale1
-    FOREIGN KEY (Sale_id_Sale)
-    REFERENCES Store.Sale (id_Sale)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -110,7 +87,7 @@ CREATE TABLE IF NOT EXISTS Store.Product_has_Sale (
   Product_id_Product INT NOT NULL,
   Product_Sale_idSale INT NOT NULL,
   Sale_id_Sale INT NOT NULL,
-  PRIMARY KEY (Product_id_Product, Product_Sale_idSale, Sale_id_Sale),
+  PRIMARY KEY (Product_id_Product, Product_Sale_idSale,Sale_id_Sale),
   INDEX fk_Product_has_Sale_Sale1_idx (Sale_id_Sale ASC) VISIBLE,
   INDEX fk_Product_has_Sale_Product1_idx (Product_id_Product ASC, Product_Sale_idSale ASC) VISIBLE,
   CONSTRAINT fk_Product_has_Sale_Product1
@@ -169,6 +146,27 @@ CREATE TABLE IF NOT EXISTS Store.Customer_has_Sale (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `Store`.`Saller`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS Store.Saller (
+  id_Saller INT NOT NULL AUTO_INCREMENT,
+  name_sell VARCHAR(45),
+  type_document VARCHAR(45) NOT NULL,
+  number_document VARCHAR(45) NOT NULL,
+  create_at DATE NOT NULL,
+  update DATE,
+  delete DATE,
+  Sale_id_Sale INT NOT NULL,
+  PRIMARY KEY (id_Saller, Sale_id_Sale),
+  INDEX fk_Saller_Sale1_idx (Sale_id_Sale ASC) VISIBLE,
+  CONSTRAINT fk_Saller_Sale1
+    FOREIGN KEY (Sale_id_Sale)
+    REFERENCES Store.Sale (id_Sale)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
 
 INSERT INTO Product(name_product,category_product,price_product, creat_at_product)
 VALUES
@@ -181,7 +179,7 @@ VALUES
   ("Block Carta x500","Papeleria",8900,"2003-06-17"),
   ("Temperas x1","Pinturas",1200,"2015-04-12"),
   ("Colores Doble Punta","Utiles",13000,"2004-02-17"),
-  ("Platilina","Manualidades",6000,"2002-10-28"),
+  ("Plastilina","Manualidades",6000,"2002-10-28"),
   ("Tijeras","Utiles",1800,"2006-04-10"),
   ("Borrador","Utiles",1000,"2010-07-16"),
   ("Zacapuntas","Utiles",500,"2018-01-31"),
@@ -222,7 +220,39 @@ INSERT INTO Provider(prov_name, prov_type_document,prov_num_document, prov_creat
 (5,"Block Carta x500","2003-06-17"),
 (6,"Temperas x1","2015-04-12"),
 (7,"Colores Doble Punta","2004-02-17"),
-(8,"Platilina","2002-10-2"),
+(8,"Plasilina","2002-10-2"),
 (9,"lapiz Negro","2009-01-17"),
 (10,"Liquid Paper","2019-06-15");
 
+
+INSERT INTO Saller(Sale_id_Sale,type_document,number_document,create_at)
+VALUES
+(11,"CC","71262098","2020-10-08"),
+(12,"CC","71262098","2020-10-08"),
+(13,"CC","71262098","2020-12-14"),
+(14,"CC","71262098","2020-12-14"),
+(15,"CC","71262098","2020-12-16"),
+(16,"CC","71262098","2020-12-16"),
+(17,"CC","71262098","2021-11-01"),
+(18,"CC","71262098","2021-01-16"),
+(18,"CC","71262098","2021-01-16"),
+(20,"CC","71262098","2021-01-16");                               
+
+-- ------------------------------------------------------
+-- logical and physical deletions from the sales table --
+-- ------------------------------------------------------
+
+UPDATE Sale SET date_anulated = "2003-10-10" WHERE id_sale = 6;
+UPDATE Sale SET date_anulated = "2004-02-17" WHERE id_sale = 2;
+
+DELETE FROM Sale WHERE id_Sale=8; 
+DELETE FROM Sale WHERE id_Sale=4;
+
+
+-- -----------------------------------------------------
+-- change data by name and provider
+-- -----------------------------------------------------
+
+UPDATE Product SET name_Product = "Liquid Paper", category_product = "Corrector", update_product = "2019-06-1" WHERE id_product = 3;
+UPDATE Product SET name_Product = "Cuaderno x50 Hojas",category_product = "Utiles",   update_product = "2001-02-5" WHERE id_product= 5;
+UPDATE Product SET name_Product = "Plastilina", category_product = "Manualidades", update_product = "2020-10-2" WHERE id_product= 8;
