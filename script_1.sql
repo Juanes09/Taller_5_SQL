@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS store.Product (
   name_product VARCHAR(45) NOT NULL,
   category_product VARCHAR(45) NOT NULL,
   price_product DOUBLE NOT NULL,
-  creat_at_produc DATE NOT NULL,
+  creat_at_product DATE NOT NULL,
   update_product DATE NULL DEFAULT NULL,
   delete_id_product DATE NULL DEFAULT NULL,
   Provider_idProvider INT NOT NULL,
@@ -166,7 +166,7 @@ INSERT INTO Provider(prov_name, prov_type_document, prov_num_document,prov_creat
 -- Insert data Sale
 -- -----------------------------------------------------
 
-INSERT INTO Sale(sale_name_product, create_sale,Saller_id_Saller, Customer_id_customer, Product_id_Product)
+INSERT INTO Sale(sale_name_product, create_sale, Customer_id_customer, Saller_id_Saller, Product_id_Product)
  VALUES
 ('Liquid Paper','2019-06-1',1,1,15),
 ('Cuaderno x50 Hojas','2001-02-5',3,1,17),
