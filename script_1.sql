@@ -2,41 +2,6 @@
 -- MySQL Workbench Forward Engineering
 
 -- -----------------------------------------------------
--- Schema Store
--- -----------------------------------------------------
-
--- -----------------------------------------------------
--- Schema Store
--- -----------------------------------------------------
-
--- -----------------------------------------------------
--- Table `Store`.`Product`
--- -----------------------------------------------------
-
-
-
--- -----------------------------------------------------
--- Table `Store`.`Provider`
--- -----------------------------------------------------
-
-
-
-
--- -----------------------------------------------------
--- Table `Store`.`Sale`
--- -----------------------------------------------------
-
--- MySQL Workbench Forward Engineering
-
-
--- -----------------------------------------------------
--- Schema mydb
--- -----------------------------------------------------
--- -----------------------------------------------------
--- Schema store
--- -----------------------------------------------------
-
--- -----------------------------------------------------
 -- Schema store
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `store` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
@@ -132,6 +97,28 @@ CREATE TABLE IF NOT EXISTS store.Sale (
   INDEX fk_Sale_Product1_idx (Product_id_Product ASC) VISIBLE)
 ENGINE = InnoDB;
 
+
+-- -----------------------------------------------------
+-- Insert data Saller
+-- -----------------------------------------------------
+
+INSERT INTO Saller(name_sell, type_document, number_document, create_at)
+VALUES
+('Juan','CC','71262098','2020-10-08');
+
+
+
+-- -----------------------------------------------------
+-- Insert data provider
+-- -----------------------------------------------------
+INSERT INTO Provider(prov_name, prov_type_document, prov_num_document,prov_creat_at)
+ VALUES
+ ('Papyser','Nit' , '1-785347625','2006-04-10'),
+ ('Abmgrupo', 'Nit' , '1-096235347','2003-10-10'),
+ ('Panafargo', 'Nit' , '1-28347625', '2008-11-10'),
+ ('Alvares_Soluciones', 'Nit' , '1-032335347', '2005-07-12');
+
+
 -- -----------------------------------------------------
 -- Insert data product
 -- -----------------------------------------------------
@@ -152,32 +139,6 @@ VALUES
   ('Zacapuntas','Utiles',500,'2018-01-31',2),
   ('Bizturi','Manualidades',2500,'2003-10-10',1);
 
--- -----------------------------------------------------
--- Insert data provider
--- -----------------------------------------------------
-INSERT INTO Provider(prov_name, prov_type_document, prov_num_document,prov_creat_at)
- VALUES
- ('Papyser','Nit' , '1-785347625','2006-04-10'),
- ('Abmgrupo', 'Nit' , '1-096235347','2003-10-10'),
- ('Panafargo', 'Nit' , '1-28347625', '2008-11-10'),
- ('Alvares_Soluciones', 'Nit' , '1-032335347', '2005-07-12');
-
--- -----------------------------------------------------
--- Insert data Sale
--- -----------------------------------------------------
-
-INSERT INTO Sale(sale_name_product, create_sale, Customer_id_customer, Saller_id_Saller, Product_id_Product)
- VALUES
-('Liquid Paper','2019-06-1',1,1,15),
-('Cuaderno x50 Hojas','2001-02-5',3,1,17),
-('Cuaderno x100 Hojas','2001-08-2',6,1,16),
-('Marcador Negro','2003-11-8',1,1,12),
-('Block Carta x500','2003-06-17',13,1,28),
-('Temperas x1','2015-04-12',3,1,26),
-('Colores Doble Punta','2004-02-17',6,1,22),
-('Plastilina','2002-10-2',7,1,23),
-('lapiz Negro','2009-01-17',8,1,17),
-('Liquid Paper','2019-06-15',6,1,18);
 
 -- -----------------------------------------------------
 -- Insert data Customer
@@ -200,13 +161,27 @@ INSERT INTO Customer(type_document, number_document, create_at)
  ('CE' , 'PE75123947','2021-11-01'),
  ('CC' , '765231248' ,'2021-01-01');
 
+
+
 -- -----------------------------------------------------
--- Insert data Saller
+-- Insert data Sale
 -- -----------------------------------------------------
 
-INSERT INTO Saller(name_sell, type_document, number_document, create_at)
-VALUES
-('Juan','CC','71262098','2020-10-08');
+INSERT INTO Sale(sale_name_product, create_sale, Customer_id_customer, Saller_id_Saller, Product_id_Product)
+ VALUES
+('Liquid Paper','2019-06-1',1,1,15),
+('Cuaderno x50 Hojas','2001-02-5',3,1,17),
+('Cuaderno x100 Hojas','2001-08-2',6,1,16),
+('Marcador Negro','2003-11-8',1,1,12),
+('Block Carta x500','2003-06-17',13,1,28),
+('Temperas x1','2015-04-12',3,1,26),
+('Colores Doble Punta','2004-02-17',6,1,22),
+('Plastilina','2002-10-2',7,1,23),
+('lapiz Negro','2009-01-17',8,1,17),
+('Liquid Paper','2019-06-15',6,1,18);
+
+
+
 
 
 -- ------------------------------------------------------
